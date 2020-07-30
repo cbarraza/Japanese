@@ -20,7 +20,7 @@ const NavBar = props => {
   
   return (
     <Fragment>
-        <AppBar position='fixed' style={{ backgroundColor: PRIMARY_COLOR }}>
+      <AppBar position='fixed' style={{ backgroundColor: PRIMARY_COLOR }}>
         <Toolbar>
           <IconButton edge='start' color='inherit' onClick={onToggle}>
             <MenuIcon />
