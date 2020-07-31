@@ -15,7 +15,7 @@ const ControlPanel = ({ actions, loading, modalOpen }) => {
   const [ tab, setTab ] = useState('students');
 
   useEffect(() => {
-    //actions.getData();
+    actions.getData();
   }, []);
 
   function onChangeTab(_, value) {

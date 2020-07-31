@@ -1,4 +1,4 @@
-import { fork, put, takeEvery } from 'redux-saga/effects';
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
 
 import { 
   CREATE_UPDATE_STUDENT,
@@ -23,7 +23,19 @@ export function* createUpdateStudent() {
 
 export function* getData() {
   yield takeEvery(GET_DATA, function* (action) {
-    console.log('GET_DATA', action);
+    const [ studentsResponse, questionsResponse ] = yield all([
+      fetch('http://localhost:3000/api/student'),
+      fetch('http://localhost:3000/api/question')
+    ]);
+    const [ studentsJson, questionJson ] = yield all([
+      studentsResponse.json(),
+      questionsResponse.json()
+    ]);
+    const result = {
+      students: studentsJson,
+      questions: questionJson,
+    };
+    yield put(getDataSuccess(result));
   })
 }
 
