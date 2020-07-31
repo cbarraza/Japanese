@@ -8,7 +8,9 @@ export const exampleAction = actionCreator(EXAMPLE_ACTION, 'param1', 'param2');
 
 // Default State
 const defaultState = {
-  exampleTest: false
+  loading: false,
+  questions: [],
+  students: []
 };
 
 const reducer = createReducer(defaultState, {
