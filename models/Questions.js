@@ -1,9 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const questionSchema = new Schema({
-  detail: String,
-  image: String,
-  text: String,
+  content: String,
+  example: String,
   type: String,
   used: Boolean
 });

@@ -7,8 +7,9 @@ import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
+// Material UI Icons
+import MenuIcon from '@material-ui/icons/Menu';
 // Constants
 import { PRIMARY_COLOR } from '../../constants/colors';
 import sections from '../../constants/sections';

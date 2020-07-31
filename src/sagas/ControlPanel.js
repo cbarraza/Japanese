@@ -1,13 +1,16 @@
 import { fork, put, takeEvery } from 'redux-saga/effects';
 
-import { EXAMPLE_ACTION } from '../reducers/ControlPanel';
+import { 
+  GET_DATA, 
+  getDataSuccess 
+} from '../reducers/ControlPanel';
 
-export function* exampleAction() {
-  yield takeEvery(EXAMPLE_ACTION, function* (action) {
-    console.log('exampleAction', action);
+export function* getData() {
+  yield takeEvery(GET_DATA, function* (action) {
+    console.log('GET_DATA', action);
   })
 }
 
 export default function* sagas() {
-  yield fork(exampleAction);
+  yield fork(getData);
 };
