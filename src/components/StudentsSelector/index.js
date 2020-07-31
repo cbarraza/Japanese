@@ -50,7 +50,7 @@ const StudentsSelector = ({ selectedStudents = [], selectStudents, students = []
         <Grid item xs={10} style={containerStyle}>
           {
             students.map(student => (
-              <Chip disabled={student.used} label={student.name} style={chipStyle} />
+              <Chip disabled={student.used} key={student.name} label={student.name} style={chipStyle} />
             ))
           }
         </Grid>
@@ -61,7 +61,7 @@ const StudentsSelector = ({ selectedStudents = [], selectStudents, students = []
       <Grid container justify="center" style={selectedStudentsStyle}>
         {
           selectedStudents.map(selectedStudent => (
-            <Grid item xs={3} style={studentStyle}>
+            <Grid item key={selectedStudent.id} xs={3} style={studentStyle}>
               {selectedStudent.name}
             </Grid>
           ))

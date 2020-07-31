@@ -20,7 +20,7 @@ const containerStyle = {
   padding: '1vw'
 };
 
-const QuestionSelector = ({ label, question = {}, selectQuestion }) => {  
+const QuestionSelector = ({ disabled, label, question = {}, selectQuestion }) => {  
   return (
     <Fragment>
       <h2>{label}</h2>
@@ -29,7 +29,7 @@ const QuestionSelector = ({ label, question = {}, selectQuestion }) => {
           { question.content }
         </Grid>
         <Grid item xs={2}>
-          <Button fullWidth onClick={selectQuestion} style={buttonStyle} variant="contained">Elegir</Button>
+          <Button disabled={disabled} fullWidth onClick={selectQuestion} style={buttonStyle} variant="contained">Elegir</Button>
         </Grid>
       </Grid>
     </Fragment>
