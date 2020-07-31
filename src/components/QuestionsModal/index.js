@@ -18,12 +18,11 @@ import Loading from '../Loading';
 
 const defaultState = {
   content: '',
-  example: '',
   used: false,
   type: 'dialog'
 };
 
-const QuestionsModal = ({ loading, open, question, toggle }) => {
+const QuestionsModal = ({ loading, onSubmit, open, question, toggle }) => {
   const [ values, setValues ] = useState(defaultState);
 
   function onChange(event) {
@@ -37,10 +36,28 @@ const QuestionsModal = ({ loading, open, question, toggle }) => {
   }
 
   function onEnter() {
-    setValues(defaultState);
+    if (question._id) { 
+      const { content, type, used } = question;
+      setValues({
+        content,
+        type,
+        used
+      });
+    } else {
+      setValues(defaultState);
+    }
   }
 
-  const action = question ? 'Editar' : 'Crear';
+  function submit() {
+    const newQuestion = { ...values };
+    if (question._id) {
+      newQuestion._id = question._id;
+    }
+    onSubmit(newQuestion);
+  }
+
+  const action = question._id ? 'Editar' : 'Crear';
+  const disabledButton = values.content.length === 0;
 
   return (
     <Dialog
@@ -66,7 +83,7 @@ const QuestionsModal = ({ loading, open, question, toggle }) => {
             <TextField id="content" label="Contenido" multiline onChange={onChange} rows={2} value={values.content} variant="outlined" fullWidth  />
           </Grid>
           {
-            question && 
+            question._id && 
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox checked={values.used} id="used" onChange={onChange} />}
@@ -82,7 +99,7 @@ const QuestionsModal = ({ loading, open, question, toggle }) => {
           <Loading /> : 
           <Fragment>
             <Button onClick={toggle}>Cancelar</Button>
-            <Button onClick={() => {console.log(action)}}>{action}</Button>
+            <Button disabled={disabledButton} onClick={submit}>{action}</Button>
           </Fragment>
         }
       </DialogActions>

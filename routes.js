@@ -7,7 +7,9 @@ const StudentsController = require('./controllers/StudentsController');
 
 // React Route
 //Questions
+router.delete('/api/question/:id', QuestionsController.deleteQuestion);
 router.get('/api/question', QuestionsController.getQuestions);
+router.put('/api/question', QuestionsController.createUpdateQuestion);
 // Students
 router.delete('/api/student/:id', StudentsController.deleteStudent);
 router.get('/api/student', StudentsController.getStudents);

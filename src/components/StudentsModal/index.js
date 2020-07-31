@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 // Components
 import Loading from '../Loading';
 
-const StudentsModal = ({ loading, open, student, onSubmit, toggle }) => {
+const StudentsModal = ({ loading, onSubmit, open, student, toggle }) => {
   const [ name, setName ] = useState('');
 
   function onChangeName(event) {

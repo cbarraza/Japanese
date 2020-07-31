@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 // Material UI
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
@@ -25,22 +25,33 @@ const columnHeaders = [
 ];
 
 const containerStyle = {
+  display: 'flex',
   height: '75vh',
   padding: '2vw'
 };
 
-const QuestionManager = ({ loading, modalOpen, questions, toggleModal }) => {
+const QuestionManager = ({ loading, modalOpen, onDelete, onSubmit, questions, toggleModal }) => {
+  const [ selectedQuestion, setSelectedQuestion ] = useState({});
+
+  function onAdd() {
+    setSelectedQuestion({});
+    toggleModal();
+  }
+
+  function onEdit(question) {
+    setSelectedQuestion(question);
+    toggleModal();
+  }
+
   return (
     <Fragment>
       <Grid container style={containerStyle}>
-        <Grid container justify="center">
-          <Table columns={columnHeaders} data={questions} loading={loading} showActions />
-        </Grid>
-        <Fab onClick={toggleModal} style={actionButtonStyle}>
-          <AddIcon />
-        </Fab>
+        <Table columns={columnHeaders} data={questions} loading={loading} onDelete={onDelete} onEdit={onEdit}  showActions />
       </Grid>
-      <QuestionsModal loading={loading} open={modalOpen} toggle={toggleModal} />
+      <Fab onClick={onAdd} style={actionButtonStyle}>
+        <AddIcon />
+      </Fab>
+      <QuestionsModal loading={loading} question={selectedQuestion} onSubmit={onSubmit} open={modalOpen} toggle={toggleModal} />
     </Fragment>
   );
 };
