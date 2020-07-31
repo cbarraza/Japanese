@@ -5,6 +5,7 @@ const routes = require('./routes');
 require('./database');
 
 // Settings
+app.use(express.json());
 app.set('PORT', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, '/public')));
 

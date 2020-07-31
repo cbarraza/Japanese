@@ -28,7 +28,7 @@ const containerStyle = {
   padding: '2vw'
 };
 
-const Students = ({ loading, modalOpen, students, toggleModal }) => {
+const Students = ({ loading, modalOpen, onSubmit, students, toggleModal }) => {
   return (
     <Fragment>
       <Grid container style={containerStyle}>
@@ -39,7 +39,7 @@ const Students = ({ loading, modalOpen, students, toggleModal }) => {
           <AddIcon />
         </Fab>
       </Grid>
-      <StudentsModal loading={loading} open={modalOpen} toggle={toggleModal} />
+      <StudentsModal loading={loading} onSubmit={onSubmit} open={modalOpen} toggle={toggleModal} />
     </Fragment>
   );
 };

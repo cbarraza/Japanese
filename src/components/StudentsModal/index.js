@@ -10,18 +10,34 @@ import TextField from '@material-ui/core/TextField';
 // Components
 import Loading from '../Loading';
 
-const StudentsModal = ({ loading, open, student, toggle }) => {
+const StudentsModal = ({ loading, open, student, onSubmit, toggle }) => {
   const [ name, setName ] = useState('');
 
   function onChangeName(event) {
     setName(event.target.value);
   }
 
+  function onEnter() {
+    setName('');
+  }
+
+  function submit() {
+    const newStudent = {
+      name
+    };
+    if (student) {
+      newStudent._id = student._id;
+    }
+    onSubmit(newStudent);
+  }
+
   const action = student ? 'Editar' : 'Crear';
+  const disabledButton = name.length === 0;
 
   return (
     <Dialog
       onClose={toggle}
+      onEnter={onEnter}
       open={open}
     >
       <DialogTitle>{action} estudiante</DialogTitle>
@@ -36,7 +52,7 @@ const StudentsModal = ({ loading, open, student, toggle }) => {
           <Loading /> : 
           <Fragment>
             <Button onClick={toggle}>Cancelar</Button>
-            <Button onClick={() => {console.log(action)}}>{action}</Button>
+            <Button disabled={disabledButton} onClick={submit}>{action}</Button>
           </Fragment>
         }
       </DialogActions>

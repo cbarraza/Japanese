@@ -65,15 +65,15 @@ const QuestionsModal = ({ loading, open, question, toggle }) => {
           <Grid item xs={12}>
             <TextField id="content" label="Contenido" multiline onChange={onChange} rows={2} value={values.content} variant="outlined" fullWidth  />
           </Grid>
-          <Grid item xs={12}>
-            <TextField id="example" label="Ejemplo" multiline onChange={onChange} rows={2} value={values.example} variant="outlined" fullWidth/>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={<Checkbox checked={values.used} id="used" onChange={onChange} />}
-              label="Usado"
-            />
-          </Grid>
+          {
+            question && 
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox checked={values.used} id="used" onChange={onChange} />}
+                label="Usado"
+              />
+            </Grid>
+          }
         </Grid>
       </DialogContent>
       <DialogActions>
