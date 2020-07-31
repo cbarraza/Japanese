@@ -15,7 +15,8 @@ const deleteQuestion = async (req, res) => {
 };
 
 const getQuestions = async (req, res) => {
-  const response = await Question.find();
+  const { query } = req;
+  const response = await Question.find(query);
   res.json(response);
 };
 

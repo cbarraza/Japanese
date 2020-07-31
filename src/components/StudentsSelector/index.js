@@ -61,7 +61,7 @@ const StudentsSelector = ({ selectedStudents = [], selectStudents, students = []
       <Grid container justify="center" style={selectedStudentsStyle}>
         {
           selectedStudents.map(selectedStudent => (
-            <Grid item key={selectedStudent.id} xs={3} style={studentStyle}>
+            <Grid item key={selectedStudent._id} xs={3} style={studentStyle}>
               {selectedStudent.name}
             </Grid>
           ))
