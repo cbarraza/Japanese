@@ -3,6 +3,8 @@ import { all, fork, put, takeEvery } from 'redux-saga/effects';
 import { 
   CREATE_UPDATE_STUDENT,
   createUpdateStudentSuccess,
+  DELETE_STUDENT,
+  deleteStudentSuccess,
   GET_DATA, 
   getDataSuccess 
 } from '../reducers/ControlPanel';
@@ -18,6 +20,13 @@ export function* createUpdateStudent() {
     });
     const responseJson = yield response.json();
     yield put(createUpdateStudentSuccess(responseJson));
+  })
+}
+
+export function* deleteStudent() {
+  yield takeEvery(DELETE_STUDENT, function* (action) {
+    yield fetch(`http://localhost:3000/api/student/${action.student._id}`, { method: 'DELETE' });
+    yield put(deleteStudentSuccess(action.student));
   })
 }
 
@@ -41,5 +50,6 @@ export function* getData() {
 
 export default function* sagas() {
   yield fork(createUpdateStudent);
+  yield fork(deleteStudent);
   yield fork(getData);
 };

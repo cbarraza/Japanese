@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 // Material UI
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
@@ -24,22 +24,33 @@ const columnHeaders = [
 ];
 
 const containerStyle = {
+  display: 'flex',
   height: '75vh',
   padding: '2vw'
 };
 
-const Students = ({ loading, modalOpen, onSubmit, students, toggleModal }) => {
+const Students = ({ loading, modalOpen, onDelete, onSubmit, students, toggleModal }) => {
+  const [ selectedStudent, setSelectedStudent ] = useState({});
+
+  function onAdd() {
+    setSelectedStudent({});
+    toggleModal();
+  }
+
+  function onEdit(student) {
+    setSelectedStudent(student);
+    toggleModal();
+  }
+
   return (
     <Fragment>
-      <Grid container style={containerStyle}>
-        <Grid container justify="center">
-          <Table columns={columnHeaders} data={students} loading={loading} showActions />
-        </Grid>
-        <Fab onClick={toggleModal} style={actionButtonStyle}>
-          <AddIcon />
-        </Fab>
+      <Grid container justify="center" style={containerStyle}>
+        <Table columns={columnHeaders} data={students} loading={loading} onEdit={onEdit} onDelete={onDelete} showActions />
       </Grid>
-      <StudentsModal loading={loading} onSubmit={onSubmit} open={modalOpen} toggle={toggleModal} />
+      <Fab onClick={onAdd} style={actionButtonStyle}>
+        <AddIcon />
+      </Fab>
+      <StudentsModal loading={loading} onSubmit={onSubmit} open={modalOpen} student={selectedStudent} toggle={toggleModal} />
     </Fragment>
   );
 };

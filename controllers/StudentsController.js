@@ -9,6 +9,11 @@ const createUpdateStudent = async (req, res) => {
   res.json(updatedStudent);
 };
 
+const deleteStudent = async (req, res) => {
+  const student = await Student.findOneAndDelete({ _id: req.params.id });
+  res.json(student);
+};
+
 const getStudents = async (req, res) => {
   const response = await Student.find();
   res.json(response);
@@ -16,5 +21,6 @@ const getStudents = async (req, res) => {
 
 module.exports = {
   createUpdateStudent,
+  deleteStudent,
   getStudents
 };

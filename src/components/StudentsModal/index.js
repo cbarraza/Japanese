@@ -18,20 +18,24 @@ const StudentsModal = ({ loading, open, student, onSubmit, toggle }) => {
   }
 
   function onEnter() {
-    setName('');
+    if (student._id) {
+      setName(student.name);
+    } else {
+      setName('');
+    }
   }
 
   function submit() {
     const newStudent = {
       name
     };
-    if (student) {
+    if (student._id) {
       newStudent._id = student._id;
     }
     onSubmit(newStudent);
   }
 
-  const action = student ? 'Editar' : 'Crear';
+  const action = student._id ? 'Editar' : 'Crear';
   const disabledButton = name.length === 0;
 
   return (

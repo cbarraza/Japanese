@@ -11,7 +11,7 @@ import * as controlPanelActions from '../../reducers/ControlPanel';
 // Utils
 import { initContainer } from '../../utils';
 
-const ControlPanel = ({ actions, loading, modalOpen }) => {
+const ControlPanel = ({ actions, loading, modalOpen, students }) => {
   const [ tab, setTab ] = useState('students');
 
   useEffect(() => {
@@ -31,7 +31,14 @@ const ControlPanel = ({ actions, loading, modalOpen }) => {
       </Tabs>
       {
         tab === 'students' &&
-        <Students modalOpen={modalOpen} loading={loading} onSubmit={actions.createUpdateStudent} students={[]} toggleModal={actions.toggleModal} />
+        <Students 
+          loading={loading} 
+          modalOpen={modalOpen} 
+          onDelete={actions.deleteStudent} 
+          onSubmit={actions.createUpdateStudent} 
+          students={students} 
+          toggleModal={actions.toggleModal} 
+        />
       }
       {
         tab === 'questions' &&

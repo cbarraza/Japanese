@@ -14,12 +14,16 @@ import EditIcon from '@material-ui/icons/Edit';
 // Components
 import Loading from '../Loading';
 
+const containerStyle = {
+  height: '100%'
+};
+
 const TableComponent = ({ columns, data, loading, onDelete, onEdit, showActions }) => {
   return (
     loading ?
     <Loading /> :
-    <TableContainer component={Paper}>
-      <Table>
+    <TableContainer component={Paper} style={containerStyle}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             {
@@ -32,19 +36,19 @@ const TableComponent = ({ columns, data, loading, onDelete, onEdit, showActions 
         </TableHead>
         <TableBody>
           {data.map(row => (
-            <TableRow key={row.key}>
+            <TableRow key={row._id}>
               {
                 columns.map(column => (
-                  <TableCell key={`${row.key}-${column.key}`}>{row[column.key]}</TableCell>
+                  <TableCell key={`${row._id}-${column.key}`}>{row[column.key]}</TableCell>
                 ))
               }
               { 
                 showActions && 
                 <TableCell>
-                  <IconButton onClick={() => { console.log('edit') }}>
+                  <IconButton onClick={() => onEdit(row)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => { console.log('delete') }}>
+                  <IconButton onClick={() => onDelete(row)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell> 

@@ -9,6 +9,7 @@ const StudentsController = require('./controllers/StudentsController');
 //Questions
 router.get('/api/question', QuestionsController.getQuestions);
 // Students
+router.delete('/api/student/:id', StudentsController.deleteStudent);
 router.get('/api/student', StudentsController.getStudents);
 router.put('/api/student', StudentsController.createUpdateStudent);
 
